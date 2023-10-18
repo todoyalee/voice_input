@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tc_editor/controllers/translator_controller.dart';
+import 'package:tc_editor/presentation/widgets/speech_dialog.dart';
 
 import '../../controllers/tc_controller.dart';
 import '../../data/models/tc_models.dart';
@@ -21,12 +22,22 @@ class InputDialog extends ConsumerWidget {
       _textController.text = data!.value;
     }
     return Padding(
-      padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
       child: SizedBox(
         height: 380,
         child: Column(
           children: [
-            IconButton(onPressed: (){}, icon: Icon(Icons.mic, size: 30,)),
+            IconButton(onPressed: (){
+              showDialog(context: context, builder: (context){
+                return Dialog(
+                  child: SpeechDialog(onSubmit: (value){
+                    if(value.isNotEmpty) {
+                      _textController.text = value;
+                    }
+                  },),
+                );
+              });
+            }, icon: Icon(Icons.mic, size: 30,)),
 
             Form(
                 key: _formKey,

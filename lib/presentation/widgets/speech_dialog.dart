@@ -3,7 +3,8 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class SpeechDialog extends StatefulWidget {
-  const SpeechDialog({super.key});
+  final Function(String) onSubmit;
+  const SpeechDialog({super.key, required this.onSubmit});
 
   @override
   State<SpeechDialog> createState() => _SpeechDialogState();
@@ -52,12 +53,14 @@ class _SpeechDialogState extends State<SpeechDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 200,),
-          Text(_lastWords),
+          Text(_lastWords, style: Theme.of(context).textTheme.bodyLarge,),
           const SizedBox(height: 16,),
           Text(
             // If listening is active show the recognized words
@@ -77,11 +80,14 @@ class _SpeechDialogState extends State<SpeechDialog> {
 
           MaterialButton(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6)
+                borderRadius: BorderRadius.circular(6)
             ),
             color: Colors.green,
-            onPressed: _speechToText.isListening ? null : (){},
-            child: Text('Submit'),)
+            onPressed: _speechToText.isListening ? null : (){
+              widget.onSubmit(_lastWords);
+              Navigator.of(context).pop();
+            },
+            child: const Text('Submit'),)
         ],
       ),
     );

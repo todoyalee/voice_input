@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tc_editor/controllers/tc_controller.dart';
-import 'package:tc_editor/data/models/tc_models.dart';
-import 'package:tc_editor/presentation/widgets/speech_dialog.dart';
 
 import '../widgets/tc_card.dart';
 import '../widgets/tc_dialog.dart';
@@ -17,11 +15,6 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Terms & Conditions'),
-        actions: [
-          IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SpeechDialog()));
-          }, icon: Icon(Icons.add_circle))
-        ],
       ),
       body: ListView.builder(
           itemCount: tcListController.length + 1,
