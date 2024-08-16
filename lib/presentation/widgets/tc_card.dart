@@ -1,4 +1,5 @@
-import 'dart:ffi';
+import 'dart:io' if (dart.library.html) 'dart:html' as platform;
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
