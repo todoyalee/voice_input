@@ -14,33 +14,35 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Terms & Conditions'),
+        title: const Text('Quotes'),
       ),
       body: ListView.builder(
           itemCount: tcListController.length + 1,
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemBuilder: (context, index){
-            if(index == tcListController.length){
+          itemBuilder: (context, index) {
+            if (index == tcListController.length) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: MaterialButton(
                   minWidth: double.infinity,
                   color: Colors.green,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6)
-                  ),
-                  onPressed: (){
+                      borderRadius: BorderRadius.circular(6)),
+                  onPressed: () {
                     showBottomSheet(
                         context: context,
-                        builder: (context){
+                        builder: (context) {
                           return InputDialog();
                         });
                   },
-                child: const Text('Add More'),),
+                  child: const Text('Add More'),
+                ),
               );
             }
-        return TCCard(data: tcListController[index],);
-      }),
+            return TCCard(
+              data: tcListController[index],
+            );
+          }),
     );
   }
 }

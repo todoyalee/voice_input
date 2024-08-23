@@ -17,6 +17,7 @@ class _SpeechDialogState extends State<SpeechDialog> {
 
   @override
   void initState() {
+    
     super.initState();
     _initSpeech();
   }
